@@ -75,7 +75,7 @@ var Ball = function(){
 		if(this.x + this.radius > p.x && this.x < p.x + p.width && this.y + this.radius > p.y
 			&& this.y < p.y + p.height)
 		{
-			dx = dx * -1; 
+			//dx = dx * -1; 
 			dy = dy * -1; 
 		}
 
@@ -84,9 +84,11 @@ var Ball = function(){
 		if(this.x + this.radius > blocks[i].x && this.x < blocks[i].x + blocks[i].width && this.y + this.radius > blocks[i].y
 			&& this.y < blocks[i].y + blocks[i].height)
 			{
-				dx = dx * -1; 
+			 
 				dy = dy * -1; 
 
+
+				// Remove block from array
 				blocks.splice(i, 1);  
 			}
 
