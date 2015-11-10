@@ -41,6 +41,7 @@ var Ball = function(){
 	this.x = c.width /2; 
 	this.y = c.height /2;
 	this.radius = 10; 
+	this.holdBall = true; 
 
 	this.dx = 2; 
 	this.dy = -2; 
@@ -48,7 +49,16 @@ var Ball = function(){
 
 Ball.prototype.drawBall = function(){
 	ctx.beginPath(); 
-	ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false); 
+
+	if(this.holdBall == true){
+		ctx.arc(p.x + (p.width / 2), p.y - 15, this.radius,0, 2*Math.PI, false); 
+
+		this.x = p.x + (p.width / 2); 
+		this.y = p.y - (p.height); 
+	}
+	else
+		ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false); 
+
 	ctx.fillStyle = "red"; 
 	ctx.fill(); 
 	ctx.lineWidth = 2; 
@@ -164,8 +174,11 @@ function gameLoop(){
 
 	drawBlocks(); 
 	p.drawPlayer(); 
-	b.drawBall(); 
-	b.moveBall(); 
+	b.drawBall();
+
+	if(b.holdBall == false)
+		b.moveBall(); 
+
 	b.collisionCheck();
 };
 
@@ -179,6 +192,10 @@ function getKeyDown(e){
 
 	switch(e.keyCode){
 
+		// Spacebar
+		case 32: 
+			b.holdBall = false; 
+			break; 
 		// left arrow
 		case 37: 
 			p.x -= 10; 
