@@ -42,6 +42,9 @@ var Ball = function(){
 	this.y = c.height /2;
 	this.radius = 10; 
 
+	var dx = 2; 
+	var dy = -2; 
+
 	this.drawBall = function(){
 		ctx.beginPath(); 
 		ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false); 
@@ -50,6 +53,45 @@ var Ball = function(){
 		ctx.lineWidth = 2; 
 		ctx.strokeStyle = '#000000'; 
 		ctx.stroke(); 
+	}
+
+	this.moveBall = function(){
+		this.x += dx; 
+		this.y += dy; 
+	}
+
+	this.collsionCheck = function(){
+
+		var i = 0; 
+
+		if(this.x + this.radius >= c.width || this.x + this.radius <= 0){
+			dx  = dx * -1; 
+		}
+
+		if(this.y + this.radius >= c.height || this.y + this.radius <= 0){
+			dy = dy * -1; 
+		}
+
+		if(this.x + this.radius > p.x && this.x < p.x + p.width && this.y + this.radius > p.y
+			&& this.y < p.y + p.height)
+		{
+			dx = dx * -1; 
+			dy = dy * -1; 
+		}
+
+		while(i < blocks.length){
+
+		if(this.x + this.radius > blocks[i].x && this.x < blocks[i].x + blocks[i].width && this.y + this.radius > blocks[i].y
+			&& this.y < blocks[i].y + blocks[i].height)
+			{
+				dx = dx * -1; 
+				dy = dy * -1; 
+
+				blocks.splice(i, 1);  
+			}
+
+			i++; 
+		}
 	}
 }
 // Initialize Game
@@ -109,6 +151,8 @@ function gameLoop(){
 	drawBlocks(); 
 	p.drawPlayer(); 
 	b.drawBall(); 
+	b.moveBall(); 
+	b.collsionCheck();
 }
 
 function clear(){
@@ -123,11 +167,11 @@ function getKeyDown(e){
 
 		// left arrow
 		case 37: 
-			p.x -= 5; 
+			p.x -= 10; 
 			break;
 		// right arrow
 		case 39: 
-			p.x += 5;  
+			p.x += 10;  
 			break; 
 	}
 }
