@@ -43,8 +43,8 @@ var Ball = function(){
 	this.radius = 10; 
 	this.holdBall = true; 
 
-	this.dx = 2; 
-	this.dy = -2; 
+	this.dx = 3; 
+	this.dy = -3; 
 };
 
 Ball.prototype.drawBall = function(){
