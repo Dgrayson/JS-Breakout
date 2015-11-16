@@ -198,11 +198,13 @@ function getKeyDown(e){
 			break; 
 		// left arrow
 		case 37: 
-			p.x -= 10; 
+			if(p.x >= 0)
+				p.x -= 10; 
 			break;
 		// right arrow
 		case 39: 
-			p.x += 10;  
+			if(p.x + p.width <= c.width)
+				p.x += 10;  
 			break; 
 	}
 };
