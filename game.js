@@ -60,9 +60,10 @@ Ball.prototype.drawBall = function(){
 		ctx.arc(this.x, this.y, this.radius, 0, 2*Math.PI, false); 
 
 	ctx.fillStyle = "red"; 
-	ctx.fill(); 
 	ctx.lineWidth = 2; 
 	ctx.strokeStyle = '#000000'; 
+	ctx.closePath(); 
+	ctx.fill(); 
 	ctx.stroke(); 
 };
 
